@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import axios from 'axios'
 
-function Dashboard() {
+function Dashboard({onLogout}) {
   const [bookings, setBookings] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
   const bookingsPerPage = 10
@@ -35,6 +35,11 @@ function Dashboard() {
 }
 
   const handleEdit = (id) => navigate(`/editbooking/${id}`);
+
+   
+  const handleCreateBooking = () => {
+    navigate('/createbooking');
+  }
 
 
   const handleDelete = async (id) => {
@@ -123,7 +128,10 @@ function Dashboard() {
             {idx + 1}
           </button>
         ))}
+        <button className='bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500' onClick={handleCreateBooking}>Create Booking</button>
+         <button onClick={onLogout}  className="bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-opacity-50">Logout</button>
       </div>
+     
     </div>
   );
 }

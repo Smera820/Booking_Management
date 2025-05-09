@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import toast from 'react-hot-toast'
+import { Navigate, useNavigate } from 'react-router-dom'
+
 
 function CreateBooking({ onBookingCreated }) {
   const [formData, setFormData] = useState({
@@ -12,6 +14,8 @@ function CreateBooking({ onBookingCreated }) {
     checkout: '',
     additionalneeds: ''
   })
+
+  const navigate=useNavigate()
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -67,7 +71,9 @@ function CreateBooking({ onBookingCreated }) {
 
 
       onBookingCreated?.()
-    } catch (err) {
+      navigate('/dashboard')
+    } 
+    catch (err) {
       toast.error("Something went wrong!")
       console.log(err);
     }

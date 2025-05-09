@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import axios from 'axios'
 
-function Login() {
+function Login({onLogin}) {
     const [formData, setFormData] = useState({
         username: '',
         password: ''
@@ -35,6 +35,7 @@ function Login() {
             if (token) {
                 localStorage.setItem('token', token)
                 toast.success('Login successful!')
+                onLogin()
                 navigate('/dashboard')
             } else {
                 toast.error('Invalid credentials')
